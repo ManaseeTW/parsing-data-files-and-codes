@@ -1,0 +1,27 @@
+samples <- data_frame(files = Sys.glob("/Users/Manasee Weerathunga/OneDrive/Documents/Vollenhovia/Toy/*.txt")) %>% separate(files, into = c(NA, "name", NA), sep = "/", remove = F)
+samples (Result)
+# A tibble: 2 x 2
+  files                                                               name 
+  <chr>                                                               <chr>
+1 /Users/Manasee Weerathunga/OneDrive/Documents/Vollenhovia/Toy/A.txt Users
+2 /Users/Manasee Weerathunga/OneDrive/Documents/Vollenhovia/Toy/B.txt Users
+summaries <- list()
+for (i in 1:nrow(samples)) {
+summaries[[i]] <- read_table(as.character(samples[i, "files"]), skip = 0, col_types = "cc-c-")
+}
+summaries
+[[1]]
+# A tibble: 2 x 1
+  `Prop Min Max`
+  <chr>               
+1 A 100 200           
+2 B 300 400           
+
+[[2]]
+# A tibble: 2 x 1
+  `Prop Min Max`
+  <chr>         
+1 A 400 550     
+2 B 640 704   
+
+# The code was successful for this code except for not getting the directory names
