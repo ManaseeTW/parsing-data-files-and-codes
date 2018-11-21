@@ -1,0 +1,48 @@
+for files summary1.txt,summary3.txt and summary4.txt
+samples <- data_frame(files = Sys.glob("/Users/Manasee Weerathunga/OneDrive/Documents/Vollenhovia/NewR/*.txt")) %>% separate(files, into = c(NA, "name", NA), sep = " ", remove = F)
+samples
+# A tibble: 3 x 2
+  files                                                                       name                                                        
+  <chr>                                                                       <chr>                                                       
+1 /Users/Manasee Weerathunga/OneDrive/Documents/Vollenhovia/NewR/summary1.txt Weerathunga/OneDrive/Documents/Vollenhovia/NewR/summary1.txt
+2 /Users/Manasee Weerathunga/OneDrive/Documents/Vollenhovia/NewR/summary3.txt Weerathunga/OneDrive/Documents/Vollenhovia/NewR/summary3.txt
+3 /Users/Manasee Weerathunga/OneDrive/Documents/Vollenhovia/NewR/summary4.txt Weerathunga/OneDrive/Documents/Vollenhovia/NewR/summary4.txt
+summaries <- list()
+for (i in 1:nrow(samples)) {
+summaries[[i]] <- read_table(as.character(samples[i, "files"]), skip = 0, col_types = "cc-c-")
+}
+summaries
+[[1]]
+# A tibble: 6 x 1
+  `property\tmin\tmax`                           
+  <chr>                                                
+1 "Heterozygosity\t7.75128%\t8.24056%"                 
+2 "Genome Haploid Length\t89,492,848 bp\t90,594,299 bp"
+3 "Genome Repeat Length\t53,533,716 bp\t54,192,593 bp" 
+4 "Genome Unique Length\t35,959,132 bp\t36,401,706 bp" 
+5 "Model Fit\t87.2618%\t93.3758%"                      
+6 "Read Error Rate\t0.914395%\t0.914395%"              
+
+[[2]]
+# A tibble: 6 x 1
+  `property\tmin\tmax`                                
+  <chr>                                               
+1 "Heterozygosity\t7.28191%\t7.70894%"                
+2 "Genome Haploid Length\t131,091,676 bp\t132,233,757"
+3 "Genome Repeat Length\t81,150,286 bp\t81,857,274 bp"
+4 "Genome Unique Length\t49,941,390 bp\t50,376,483 bp"
+5 "Model Fit\t89.118%\t96.4358%"                      
+6 "Read Error Rate\t0.26612%\t0.26612%"               
+
+[[3]]
+# A tibble: 6 x 1
+  `property\tmin\tmax`                                 
+  <chr>                                                
+1 "Heterozygosity\t7.66312%\t8.13964%"                 
+2 "Genome Haploid Length\t92,082,263 bp\t93,418,165 bp"
+3 "Genome Repeat Length\t55,639,205 bp\t56,446,402 bp" 
+4 "Genome Unique Length\t36,443,058 bp\t36,971,763 bp" 
+5 "Model Fit\t86.7589%\t93.7539%"                      
+6 "Read Error Rate\t0.8762%\t0.8762%"   
+
+#Results didnot have any missing data. But the columns were separated by tabs and no directory name either
