@@ -1,0 +1,59 @@
+#Result for real data set with suggested codes
+library(tidyverse)
+
+samples <- tibble(files = Sys.glob("/Users/Manasee Weerathunga/OneDrive/Documents/Vollenhovia/Vol-new/*.txt")) %>% separate(files, into = c(NA, "name", NA), sep = "/", remove = F)
+Result
+  A tibble: 47 x 2
+   files                                                                           name 
+   <chr>                                                                           <chr>
+ 1 /Users/Manasee Weerathunga/OneDrive/Documents/Vollenhovia/Vol-new/summary1.txt  Users
+ 2 /Users/Manasee Weerathunga/OneDrive/Documents/Vollenhovia/Vol-new/summary10.txt Users
+ 3 /Users/Manasee Weerathunga/OneDrive/Documents/Vollenhovia/Vol-new/summary13.txt Users
+ 4 /Users/Manasee Weerathunga/OneDrive/Documents/Vollenhovia/Vol-new/summary14.txt Users
+ 5 /Users/Manasee Weerathunga/OneDrive/Documents/Vollenhovia/Vol-new/summary18.txt Users
+ 6 /Users/Manasee Weerathunga/OneDrive/Documents/Vollenhovia/Vol-new/summary20.txt Users
+ 7 /Users/Manasee Weerathunga/OneDrive/Documents/Vollenhovia/Vol-new/summary21.txt Users
+ 8 /Users/Manasee Weerathunga/OneDrive/Documents/Vollenhovia/Vol-new/summary22.txt Users
+ 9 /Users/Manasee Weerathunga/OneDrive/Documents/Vollenhovia/Vol-new/summary23.txt Users
+10 /Users/Manasee Weerathunga/OneDrive/Documents/Vollenhovia/Vol-new/summary25.txt Users
+# ... with 37 more rows
+
+summaries <- list()
+for (i in 1:nrow(samples)) {
+summaries[[i]] <- read_table(as.character(samples[i, "files"]), skip = 3, col_types = "cc-c-")
+}
+Result
+[[1]]
+# A tibble: 6 x 3
+  property              min        max       
+  <chr>                 <chr>      <chr>     
+1 Heterozygosity        7.75128%   8.24056%  
+2 Genome Haploid Length 89,492,848 90,594,299
+3 Genome Repeat Length  53,533,716 54,192,593
+4 Genome Unique Length  35,959,132 36,401,706
+5 Model Fit             87.2618%   93.3758%  
+6 Read Error Rate       0.914395%  0.914395% 
+
+[[2]]
+# A tibble: 6 x 3
+  property              min        max           
+  <chr>                 <chr>      <chr>         
+1 Heterozygosity        7.50589%   7.96289%      
+2 Genome Haploid Length 99,531,321 100,890,521 bp
+3 Genome Repeat Length  60,407,283 61,232,206 bp 
+4 Genome Unique Length  39,124,037 39,658,315 bp 
+5 Model Fit             87.0749%   94.1011%      
+6 Read Error Rate       0.732843%  0.732843%     
+
+[[3]]
+# A tibble: 6 x 2
+  property              min  
+  <chr>                 <chr>
+1 Heterozygosity        -100%
+2 Genome Haploid Length -1 bp
+3 Genome Repeat Length  -1 bp
+4 Genome Unique Length  -1 bp
+5 Model Fit             0%   
+6 Read Error Rate       -100% 
+contd.
+# in some samples the max column was missing.
